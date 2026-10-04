@@ -32,7 +32,7 @@ Vercel serves the Next.js app. All real-time traffic goes over Supabase Realtime
 ### 1. Supabase
 
 1. Create a project at [supabase.com](https://supabase.com) (the free tier is fine).
-2. In **SQL Editor**, paste and run [`supabase/schema.sql`](supabase/schema.sql). It is idempotent, so re-running it after updates is safe.
+2. In **SQL Editor**, paste and run [`supabase/migrations/20261004000000_init.sql`](supabase/migrations/20261004000000_init.sql). It is idempotent, so re-running it after updates is safe.
 3. In **Authentication → URL Configuration**:
    - set **Site URL** to your Vercel URL, e.g. `https://sabboura.vercel.app`;
    - add `https://*.vercel.app/**` and `http://localhost:3000/**` to **Redirect URLs** if you want preview deployments and local development to work.
@@ -76,7 +76,7 @@ npm run dev                  # http://localhost:3000
 | `src/components/board/sync.ts` | `BoardSync`: delta broadcast, reconcile, throttled save, images, thumbnails, cursors |
 | `src/components/board/` | board page and the Excalidraw editor |
 | `src/components/drive/` | drive shell (sidebar, search, dialogs) and the file views |
-| `supabase/schema.sql` | tables, RLS, merge function, realtime policies |
+| `supabase/migrations/` | tables, RLS, merge function, realtime policies |
 
 ### Sync model
 

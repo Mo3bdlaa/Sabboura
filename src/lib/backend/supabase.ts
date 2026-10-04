@@ -115,7 +115,7 @@ export function createSupabaseBackend(url: string, key: string): Backend {
     },
 
     async saveScene(boardId, scene) {
-      // Server-side merge by element version; see save_board_elements in schema.sql.
+      // Server-side merge by element version; see save_board_elements in supabase/migrations/20261004000000_init.sql.
       must(
         await sb.rpc("save_board_elements", {
           p_board_id: boardId,

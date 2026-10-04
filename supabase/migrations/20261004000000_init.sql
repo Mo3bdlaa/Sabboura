@@ -1,5 +1,5 @@
--- Sabboura schema. Run once in the Supabase SQL editor (Dashboard → SQL → New query).
--- Safe to re-run: every statement is idempotent.
+-- Sabboura schema. Applied automatically by the Supabase GitHub integration, or
+-- paste it into Dashboard → SQL Editor and run it. Safe to re-run: every statement is idempotent.
 
 -- ---------------------------------------------------------------------------
 -- Drive items: folders and boards, arranged in a tree via parent_id.

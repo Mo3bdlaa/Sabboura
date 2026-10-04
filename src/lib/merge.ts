@@ -12,7 +12,7 @@ interface Versioned {
 /**
  * Merge two element lists by id: highest version wins, ties go to the lowest
  * versionNonce (Excalidraw's own rule). Mirrors save_board_elements in
- * supabase/schema.sql so local mode behaves the same.
+ * supabase/migrations/20261004000000_init.sql so local mode behaves the same.
  */
 export function mergeElements<T extends Versioned>(stored: readonly T[], incoming: readonly T[]): T[] {
   const byId = new Map<string, T>();
