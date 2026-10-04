@@ -1,5 +1,5 @@
 -- Sabboura schema. Applied automatically by the Supabase GitHub integration, or
--- paste it into Dashboard → SQL Editor and run it. Safe to re-run: every statement is idempotent.
+-- paste it into Dashboard -> SQL Editor and run it. Safe to re-run: every statement is idempotent.
 
 -- ---------------------------------------------------------------------------
 -- Drive items: folders and boards, arranged in a tree via parent_id.
@@ -35,7 +35,7 @@ create table if not exists public.board_scenes (
 
 -- ---------------------------------------------------------------------------
 -- Saving merges instead of overwriting: for each element id the copy with the
--- highest version wins (ties → lowest versionNonce, matching Excalidraw's own
+-- highest version wins (ties -> lowest versionNonce, matching the Excalidraw
 -- reconcile rule). Two devices saving at once can never clobber each other.
 -- Deleted elements are kept as tombstones for a day, then pruned.
 -- ---------------------------------------------------------------------------
@@ -47,7 +47,7 @@ create or replace function public.save_board_elements(
 language sql
 security invoker
 set search_path = public
-as $$
+as $fn$
   insert into public.board_scenes (board_id) values (p_board_id)
   on conflict (board_id) do nothing;
 
@@ -75,7 +75,7 @@ as $$
     app_state = p_app_state,
     updated_at = now()
   where s.board_id = p_board_id;
-$$;
+$fn$;
 
 -- ---------------------------------------------------------------------------
 -- Row level security: every row belongs to exactly one user.
@@ -100,11 +100,11 @@ create policy "scenes: owner full access" on public.board_scenes
 
 -- ---------------------------------------------------------------------------
 -- Realtime
--- 1) Postgres changes on items → the drive updates live across devices.
--- 2) Private broadcast/presence channels named "board:<uuid>" → only the
---    board's owner may join them.
+-- 1) Postgres changes on items -> the drive updates live across devices.
+-- 2) Private broadcast/presence channels named "board:<uuid>" -> only the
+--    board owner may join them.
 -- ---------------------------------------------------------------------------
-do $$
+do $do$
 begin
   if not exists (
     select 1 from pg_publication_tables
@@ -112,7 +112,7 @@ begin
   ) then
     alter publication supabase_realtime add table public.items;
   end if;
-end $$;
+end $do$;
 
 drop policy if exists "board channels: owner can receive" on realtime.messages;
 create policy "board channels: owner can receive" on realtime.messages
