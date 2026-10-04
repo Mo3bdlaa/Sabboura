@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface-2: #f0f0ed;
+  --border: #e4e4e0;
+  --text: #1c1c1a;
+  --muted: #6b6b66;
+  --accent: #5b4bdb;
+  --accent-soft: #ecebfc;
+  --accent-text: #ffffff;
+  --danger: #d6336c;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 4px 16px rgb(0 0 0 / 0.06);
+}
+
+[data-theme="dark"] {
+  --bg: #151514;
+  --surface: #1d1d1c;
+  --surface-2: #262624;
+  --border: #33332f;
+  --text: #ecece8;
+  --muted: #9a9a93;
+  --accent: #8b7ff0;
+  --accent-soft: #2a2647;
+  --accent-text: #121212;
+  --danger: #f06595;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.35);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-text);
+  --color-danger: var(--danger);
+  --shadow-soft: var(--shadow);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.thumb-img {
+  /* Thumbnails are rendered on white; soften them in dark mode. */
+  background: #fff;
+}
+[data-theme="dark"] .thumb-img {
+  filter: invert(0.93) hue-rotate(180deg);
+}
+
+/* Excalidraw fills its container. */
+.excalidraw-host .excalidraw {
+  --color-primary: var(--accent);
+}
